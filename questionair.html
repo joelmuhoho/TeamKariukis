@@ -177,15 +177,14 @@
                 var house = $('#option').val();
                 var action = $('#action').val();
                 var info = $('#info').val();
-                var timestamp = new Date().toLocaleString();
                 if (name && house && action && info) {
                     var data = {
                         'Grandmother': name,
                         'House': house,
                         'Action': action,
                         'Information': info,
-                        'Time': timestamp
-                    };
+                        'Time': ""
+                    }
 
                     // Show the loading spinner
                     $('#loading').removeClass('d-none');
@@ -195,7 +194,6 @@
                         data: data,
                         success: function (response) {
                             if (response.result == 'success') {
-                                console.log(response);
                                 // Hide the loading spinner and show a success message in the alert element
                                 $('#loading').addClass('d-none');
                                 // Show a success message in the alert element
