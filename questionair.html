@@ -190,21 +190,35 @@
                     // Show the loading spinner
                     $('#loading').removeClass('d-none');
                     $.ajax({
-                        url: 'https://script.google.com/macros/s/AKfycbySENgF-SVZKL4lTSGndWa0aRwoAZeWJvpO7PuvU_5eIKhYQ42YaoiofJ_TUOdRbN1I2w/exec',
+                        url: "https://script.google.com/macros/s/AKfycbwBc49hkKsa36sW_wfgunaYkzXWqcqqYwBFWa5rkYYfH43M21i7nbHGGHnITuWONG_-Rg/exec",
                         type: 'POST',
                         data: data,
                         success: function (response) {
-                            console.log(response);
-                            // Hide the loading spinner and show a success message in the alert element
-                            $('#loading').addClass('d-none');
-                            // Show a success message in the alert element
-                            $('#alert').removeClass('alert-danger').addClass('alert-success');
-                            $('#alert-text').text('Your information has been submitted successfully!');
-                            $('#alert').fadeIn(1000);
-                            setTimeout(function () {
-                                $('#alert').fadeOut(1000);
-                            }, 5000);
-                            $('form')[0].reset();
+                            if (response.result == 'success') {
+                                console.log(response);
+                                // Hide the loading spinner and show a success message in the alert element
+                                $('#loading').addClass('d-none');
+                                // Show a success message in the alert element
+                                $('#alert').removeClass('alert-danger').addClass('alert-success');
+                                $('#alert-text').text('Your information has been submitted successfully!');
+                                $('#alert').fadeIn(1000);
+                                setTimeout(function () {
+                                    $('#alert').fadeOut(1000);
+                                }, 5000);
+                                $('form')[0].reset();
+                            } else {
+                                console.log(response);
+                                // Hide the loading spinner and show a success message in the alert element
+                                $('#loading').addClass('d-none');
+                                // Show an error message in the alert element
+                                $('#alert').removeClass('alert-success').addClass('alert-danger');
+                                $('#alert-text').text('There was an error submitting your information. Please try again.');
+                                $('#alert').fadeIn(1000);
+                                setTimeout(function () {
+                                    $('#alert').fadeOut(1000);
+                                }, 5000);
+                                $('form')[0].reset();
+                            }
                         },
                         error: function (response) {
                             console.log(response);
